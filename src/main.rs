@@ -35,16 +35,16 @@ fn get_average_bits_per_click(input_list: &[String], layout: Layout) -> f64 {
     for word in input_list {
         total_number_of_clicks += number_of_clicks(&word, layout);
     }
-    let qwerty_average: f64 = total_number_of_clicks as f64 / input_list.len() as f64;
+    let average_clicks_per_word: f64 = total_number_of_clicks as f64 / input_list.len() as f64;
     println!(
         "Average clicks per word for this layout is {:.4}",
-        qwerty_average
+        average_clicks_per_word
     );
 
     let entropy_per_word = calc_entropy_per_word(input_list.len());
-    // println!("Entropy per word: {:.4} bits", entropy_per_word);
 
-    let bits_per_click = entropy_per_word / qwerty_average as f64;
+    // is this math correct?
+    let bits_per_click = entropy_per_word / average_clicks_per_word as f64;
     println!("Bits per click is {:.4}", bits_per_click);
     bits_per_click
 }
